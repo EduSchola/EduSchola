@@ -1,13 +1,13 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
 class School(models.Model):
     name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    contact_information = models.CharField(max_length=255)
-    administrator = models.OneToOneField('User', on_delete=models.CASCADE, related_name='school_administrator')
+    address = models.TextField()
+    contact_information = models.CharField(max_length=255)    
 
     def __str__(self):
         return self.name
@@ -21,16 +21,11 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-class CourseEnrollment(models.Model):
-    student = models.ForeignKey('User', on_delete=models.CASCADE)  # Many-to-One relationship with User model (Student)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Many-to-One relationship with Course model
-
-    def __str__(self):
-        return f"Enrollment ID: {self.id}, Student: {self.student.username}, Course: {self.course.name}"
 
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    issue_date = models.DateField(default=timezone.now)
     due_date = models.DateField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Many-to-One relationship with Course model
 
@@ -67,14 +62,6 @@ class Student(models.Model):
     def __str__(self):
         return self.user.username
 
-class Subject(models.Model):
-    name = models.CharField(max_length=255)
-    instructors = models.ManyToManyField('Instructor')
-    students = models.ManyToManyField(Student)
-
-    def __str__(self):
-        return self.name
-
 
 class Instructor(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='instructor_user')
@@ -82,16 +69,14 @@ class Instructor(models.Model):
     contact_information = models.TextField()
     address = models.TextField()
     school = models.ForeignKey(School, on_delete=models.CASCADE)
-    subjects = models.ManyToManyField(Subject)
+    subjects = models.ManyToManyField('Course')
     grades = models.ManyToManyField(Grade)
 
     def __str__(self):
         return self.user.username
 
 class Parent(models.Model):
-    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='parent_user')
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='parent_user')    
     contact_information = models.TextField()
     address = models.TextField()
 
