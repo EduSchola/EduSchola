@@ -1,21 +1,26 @@
 import Link from "next/link";
 const Navbar = () => {
     return ( 
-        <header className="navbar w-full flex xl:pt-5 xl:px-5 items-center">
-            <div className="navbar-logo font-bold text-xl xl:mr-16">LOGO</div>
-            <nav className="navbar__nav-items nav-items flex ">
-                <div className="nav-items hidden xl:flex xl:gap-x-20 mr-64 mt-2">
-                    <Link href="/" className="nav-items__link">Home</Link>
-                    <Link href="/" className="nav-items__link">Features</Link>
-                    <Link href="/" className="nav-items__link">Pricing</Link>
-                    <Link href="/" className="nav-items__link">Contact Us</Link>
+        <header className=" w-full ">
+            <nav className="navbar w-full flex xl:pt-5 xl:px-5 items-center">
+                <div className="logo xl:w-12 xl:h-12 rounded-full bg-orange-500 xl:mr-[10%]"></div>
+
+                <div className="navbar__links flex gap-x-20 text-lg font-medium xl:mr-[15%]">
+                    <Link href="/" className="navbar__links text-blue-500 underline">Home</Link>
+                    <Link href="/" className="navbar__link">Features</Link>
+                    <Link href="/" className="navbar__link">Pricing</Link>
+                    <Link href="/" className="navbar__link">Contact Us</Link>
                 </div>
 
-                <div className="nav-btns hidden xl:flex gap-x-10 mt-2 ">
-                    <button className="btn">Sign In</button>
-                    <button className="btn border-2 px-3 py-1 border-blue-600 rounded-lg text-blue-600 ">Get Started</button>
+                <div className="flex gap-x-8">
+                    <button className="navbar__btn">
+                        Sign In
+                    </button>
+
+                    <button className="navbar__btn border border-blue-500 text-blue-500 rounded-md xl:px-3 xl:py-1">
+                        Get Started
+                    </button>
                 </div>
-                
             </nav>
         </header>
      );
