@@ -25,8 +25,8 @@ class Course(models.Model):
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    issue_date = models.DateField(default=timezone.now)
-    due_date = models.DateField()
+    issue_date = models.DateTimeField(default=timezone.now)
+    due_date = models.DateTimeField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Many-to-One relationship with Course model
 
     def __str__(self):
@@ -93,10 +93,6 @@ class User(AbstractUser):
     role = models.CharField(max_length=10, choices=ROLES)
     school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)  # Foreign Key relationship with School model
 
-    # Relationships
-    student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='user_student')
-    parent = models.OneToOneField(Parent, on_delete=models.CASCADE, related_name='user_parent')
-    instructor = models.OneToOneField(Instructor, on_delete=models.CASCADE, related_name='user_instructor')
         # Add related_name to the groups field
     groups = models.ManyToManyField(Group, related_name='custom_user_set')
 
