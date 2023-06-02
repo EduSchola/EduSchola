@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Setup
 
-## Getting Started
+Before you start, make sure you have these prerequisites installed:
 
-First, run the development server:
+- Node.js
+- npm/Yarn
 
-```bash
+### Installation
+
+1. Clone the repository
+
+git clone https://github.com/EduSchola/Eduschola.git
+
+2. Change to the project directory
+
+cd fronted/eduschola
+
+3. Install dependencies
+
+npm install
+// or
+yarn install
+
+To run the application locally, you can use:
+
 npm run dev
-# or
+// or
 yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will usually start at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To run the tests, you can use:
+npm run test
+// or
+yarn test
 
-## Learn More
+## Building the Application
 
-To learn more about Next.js, take a look at the following resources:
+To build the application, you can use:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+npm run build
+// or
+yarn build
