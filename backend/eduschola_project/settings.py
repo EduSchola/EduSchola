@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'edusch_app',
+    'eduschola_project.edusch_app',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
