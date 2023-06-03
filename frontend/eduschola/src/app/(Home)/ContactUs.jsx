@@ -7,7 +7,7 @@ const ContactUs = () => {
             <h1 className="text-center text-2xl font-bold mb-4">Contact Us</h1>
 
             <div className='lg:flex-row xl:flex-row 2xl:flex-row gap-x-32 flex flex-col gap-y-20'>
-                <div className="contact-details flex flex-col  gap-y-12 gap-x-32 ">
+                <div className="contact-details flex flex-col 2xl:ml-80  gap-y-12 gap-x-32 md:mx-auto ">
 
                     <div className="flex gap-x-6">
                         <MdLocationOn className="text-blue-500 text-3xl" />
@@ -25,7 +25,7 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                <form className="text-center flex flex-col gap-y-8">
+                <form className="text-center flex flex-col gap-y-8 md:mx-auto">
                     <h1 className='text-lg font-semibold'>Get In Touch And Leave A Message For Us</h1>
                     <input type="email" name="email" id="email" className=' h-10 w-96 border-2 border-gray-600 rounded-md px-4 py-2' placeholder='Email'  />
                     <input type="email" name="email" id="email" className=' h-10 w-96 border-2 border-gray-600 rounded-md px-4 py-2' placeholder='Email'  />

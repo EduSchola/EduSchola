@@ -15,7 +15,7 @@ const Navbar = () => {
             <nav className="navbar w-full flex px-5 pt-5 items-center justify-between">
                 <div className="logo w-12 h-12 2xl:w-14 2xl:h-14 rounded-full bg-orange-500 "></div>
 
-                <div className="navbar__links xl:flex 2xl:flex lg:flex xl:gap-x-20 2xl:gap-x-20 lg:gap-x-14 md:gap-x-14 text-lg font-medium hidden ">
+                <div className="navbar__links xl:flex 2xl:flex lg:flex xl:gap-x-20 2xl:gap-x-20 lg:gap-x-10 md:gap-x-14 text-lg font-medium hidden ">
                     <Link href="/" className="navbar__links text-blue-500  underline">Home</Link>
                     <Link href="/" className="navbar__link">Features</Link>
                     <Link href="/" className="navbar__link">Pricing</Link>
