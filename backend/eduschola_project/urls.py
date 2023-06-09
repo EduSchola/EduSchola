@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView
+from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView, \
+    create_or_list_all_courses, CourseDeleteView
 from eduschola_project.edusch_app.views import InstructorListCreateView, InstructorRetrieveUpdateDestroyView
 from eduschola_project.edusch_app.views import ParentListCreateView, ParentRetrieveUpdateDestroyView
-
+from .edusch_app.views import get_update_delete_courseDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,9 +30,15 @@ urlpatterns = [
 
     # Instructor URLs
     path('instructors/', InstructorListCreateView.as_view(), name='instructor-list-create'),
-    path('instructors/<uuid:pk>/', InstructorRetrieveUpdateDestroyView.as_view(), name='instructor-retrieve-update-destroy'),
+    path('instructors/<uuid:pk>/', InstructorRetrieveUpdateDestroyView.as_view(),
+         name='instructor-retrieve-update-destroy'),
 
     # Parent URLs
     path('parents/', ParentListCreateView.as_view(), name='parent-list-create'),
     path('parents/<uuid:pk>/', ParentRetrieveUpdateDestroyView.as_view(), name='parent-retrieve-update-destroy'),
+
+    # Course URLs
+    path('course/', create_or_list_all_courses, name='course-create-list'),
+    path('course/<uuid:pk>/', get_update_delete_courseDetail, name='course-get-detail-update'),
+    path('course/delete/<uuid:course_id>/', CourseDeleteView.as_view(), name='course-detail-delete'),
 ]
