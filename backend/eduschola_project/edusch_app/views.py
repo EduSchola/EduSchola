@@ -157,6 +157,7 @@ class InstructorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView)
         return super().update(request, *args, **kwargs)
 
 
+# create or get all  course
 @api_view(['POST', 'GET'])
 def create_or_list_all_courses(request):
     if request.method == 'POST':
@@ -170,8 +171,9 @@ def create_or_list_all_courses(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+# get, update or delete a single course
 @api_view(['GET', 'PUT', 'DELETE'])
-def get_update_courseDetail(request, pk):
+def get_update_delete_courseDetail(request, pk):
     # get course based on pk:
     course = get_object_or_404(Course, pk=pk)
 
