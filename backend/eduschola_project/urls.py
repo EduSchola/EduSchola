@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView, \
-    create_or_list_all_courses, CourseDeleteView
+    create_or_list_all_courses, get_update_courseDetail
 from eduschola_project.edusch_app.views import InstructorListCreateView, InstructorRetrieveUpdateDestroyView
 from eduschola_project.edusch_app.views import ParentListCreateView, ParentRetrieveUpdateDestroyView
-from .edusch_app.views import get_update_delete_courseDetail
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +39,5 @@ urlpatterns = [
 
     # Course URLs
     path('course/', create_or_list_all_courses, name='course-create-list'),
-    path('course/<uuid:pk>/', get_update_delete_courseDetail, name='course-get-detail-update'),
-    path('course/delete/<uuid:course_id>/', CourseDeleteView.as_view(), name='course-detail-delete'),
+    path('course/<uuid:pk>/', get_update_courseDetail, name='course-get-detail-update'),
 ]

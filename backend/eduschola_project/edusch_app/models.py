@@ -20,9 +20,9 @@ class Course(models.Model):
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    teacher = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True)  # Many-to-One relationship
+    teacher = models.ForeignKey('Instructor', on_delete=models.CASCADE)  # Many-to-One relationship
     # with User model (Teacher)
-    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)  # Many-to-One relationship
+    school = models.ForeignKey(School, on_delete=models.CASCADE)  # Many-to-One relationship
     # with School model
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Assignment(models.Model):
     description = models.TextField()
     issue_date = models.DateTimeField(default=timezone.now)
     due_date = models.DateTimeField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Many-to-One relationship with Course model
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, to_field='course_id')  # Many-to-One relationship with Course model
 
     def __str__(self):
         return self.title
@@ -85,7 +85,7 @@ class Instructor(models.Model):
     email = models.EmailField(default='')
     address = models.TextField()
     school = models.ForeignKey(School, on_delete=models.CASCADE)
-    subjects = models.ManyToManyField('Course')
+    subjects = models.ForeignKey(Course, on_delete=models.CASCADE, to_field='course_id')
     grades = models.ManyToManyField(Grade)
 
     def __str__(self):

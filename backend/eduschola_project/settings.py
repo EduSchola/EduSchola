@@ -77,7 +77,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eduschdb',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        #'PASSWORD': '12345',
+        'PASSWORD': 'momentum',
         'HOST': 'localhost',
         'PORT': '5432',
     }

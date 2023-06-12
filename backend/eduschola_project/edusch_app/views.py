@@ -1,11 +1,15 @@
+from uuid import UUID
+
 from django.db.models import IntegerField, BigIntegerField
 from django.db.models.functions import Cast
+from django.http import Http404
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
-from rest_framework.generics import get_object_or_404, DestroyAPIView
+from rest_framework.generics import get_object_or_404, RetrieveDestroyAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, CourseSerializer
 from .models import User, Student, Instructor, Parent, Course
@@ -167,11 +171,9 @@ def create_or_list_all_courses(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def get_update_delete_courseDetail(request, pk):
+def get_update_courseDetail(request, pk):
     # get course based on pk:
     course = get_object_or_404(Course, pk=pk)
-
-    # convert pk to string before casting to bigint so the model instance can delete object:
 
     if request.method == 'GET':
         serializer = CourseSerializer(course)
@@ -181,14 +183,6 @@ def get_update_delete_courseDetail(request, pk):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
-    # if request.method == 'DELETE':
-    #     course_detail_pk_str = str(course.course_id)
-    #     course_queryset = get_object_or_404(Course, course_detail_pk_str)
-    #     course_queryset.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class CourseDeleteView(DestroyAPIView):
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-    lookup_field = 'course_id'
+    if request.method == 'DELETE':
+        course.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
