@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView
+from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView, \
+    CreateSchoolApiView
 from eduschola_project.edusch_app.views import InstructorListCreateView, InstructorRetrieveUpdateDestroyView
 from eduschola_project.edusch_app.views import ParentListCreateView, ParentRetrieveUpdateDestroyView
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,9 +29,13 @@ urlpatterns = [
 
     # Instructor URLs
     path('instructors/', InstructorListCreateView.as_view(), name='instructor-list-create'),
-    path('instructors/<uuid:pk>/', InstructorRetrieveUpdateDestroyView.as_view(), name='instructor-retrieve-update-destroy'),
+    path('instructors/<uuid:pk>/', InstructorRetrieveUpdateDestroyView.as_view(),
+         name='instructor-retrieve-update-destroy'),
 
     # Parent URLs
     path('parents/', ParentListCreateView.as_view(), name='parent-list-create'),
     path('parents/<uuid:pk>/', ParentRetrieveUpdateDestroyView.as_view(), name='parent-retrieve-update-destroy'),
+
+    # School URLs
+    path('school/', CreateSchoolApiView.as_view(), name='create-school')
 ]

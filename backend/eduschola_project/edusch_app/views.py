@@ -1,7 +1,14 @@
 from django.shortcuts import render
-from rest_framework import generics
-from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer
-from .models import User, Student, Instructor, Parent
+from rest_framework import generics, status
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+
+from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, SchoolSerializer
+from .models import User, Student, Instructor, Parent, School
+
+
 # Create your views here.
 
 # Student View
@@ -12,17 +19,18 @@ class StudentListCreateView(generics.ListCreateAPIView):
     def createStudent(self, request, *args, **kwargs):
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Create a new user instance using the user data
         user_serializer = UserSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the created user instance to the student data
         request.data['user'] = user.id
-        
+
         # Create the student instance
         return super().create(request, *args, **kwargs)
+
 
 class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
@@ -31,23 +39,24 @@ class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     def updateStudent(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        
+
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Retrieve the existing user instance associated with the student
         user = instance.user
-        
+
         # Update the existing user instance with the new data
         user_serializer = UserSerializer(user, data=user_data, partial=partial)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the updated user instance ID to the student data
         request.data['user'] = user.id
-        
+
         # Update the student instance
         return super().update(request, *args, **kwargs)
+
 
 # Parent Views
 class ParentListCreateView(generics.ListCreateAPIView):
@@ -57,17 +66,18 @@ class ParentListCreateView(generics.ListCreateAPIView):
     def createParent(self, request, *args, **kwargs):
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Create a new user instance using the user data
         user_serializer = UserSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the created user instance to the student data
         request.data['user'] = user.id
-        
+
         # Create the student instance
         return super().create(request, *args, **kwargs)
+
 
 class ParentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Parent.objects.all()
@@ -76,23 +86,24 @@ class ParentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     def updateParent(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        
+
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Retrieve the existing user instance associated with the student
         user = instance.user
-        
+
         # Update the existing user instance with the new data
         user_serializer = UserSerializer(user, data=user_data, partial=partial)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the updated user instance ID to the student data
         request.data['user'] = user.id
-        
+
         # Update the student instance
         return super().update(request, *args, **kwargs)
+
 
 class InstructorListCreateView(generics.ListCreateAPIView):
     queryset = Instructor.objects.all()
@@ -101,17 +112,18 @@ class InstructorListCreateView(generics.ListCreateAPIView):
     def createInstructor(self, request, *args, **kwargs):
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Create a new user instance using the user data
         user_serializer = UserSerializer(data=user_data)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the created user instance to the student data
         request.data['user'] = user.id
-        
+
         # Create the student instance
         return super().create(request, *args, **kwargs)
+
 
 class InstructorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Instructor.objects.all()
@@ -120,20 +132,39 @@ class InstructorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView)
     def updateInstructor(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        
+
         # Extract the user data from the request data
         user_data = request.data.pop('user', {})
-        
+
         # Retrieve the existing user instance associated with the student
         user = instance.user
-        
+
         # Update the existing user instance with the new data
         user_serializer = UserSerializer(user, data=user_data, partial=partial)
         user_serializer.is_valid(raise_exception=True)
         user = user_serializer.save()
-        
+
         # Add the updated user instance ID to the student data
         request.data['user'] = user.id
-        
+
         # Update the student instance
         return super().update(request, *args, **kwargs)
+
+
+class CreateSchoolApiView(APIView):
+    def post(self, request):
+
+        try:
+            serializer_class = SchoolSerializer(data=request.data)
+            serializer_class.is_valid(raise_exception=True)
+            serializer_class.save()
+            return Response(serializer_class.data, status=HTTP_201_CREATED)
+        except ValidationError as e:
+            return Response({'error': e.detail}, status=HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
