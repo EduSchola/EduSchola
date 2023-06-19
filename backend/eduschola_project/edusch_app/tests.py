@@ -1,3 +1,4 @@
+
 import unittest
 from django.urls import reverse
 from rest_framework import status
@@ -6,6 +7,7 @@ from .models import Student, Parent, Staff
 from .serializers import StudentSerializer
 from django.test import TestCase, Client
 from .views import StudentView, ParentView, StaffView 
+from eduschola_project.edusch_app.models import School
 
 class EduScholaViewTestCase(TestCase):
     def setUp(self):
@@ -54,4 +56,27 @@ class EduScholaViewTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Student.objects.count(), 0)
     
-        
+       
+class CreateSchoolAPITestCase(TestCase):
+
+    def test_that_school_is_created(self):
+        url = reverse('create-school')
+        data = {
+            'name': 'British international school',
+            'address': 'Lekki',
+            'contact_information': "09081167465"
+        }
+
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_for_missing_fields(self):
+        url = reverse('create-school')
+        data = {
+            'name': 'British international school',
+            'address': 'Lekki',
+        }
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code,status.HTTP_400_BAD_REQUEST)
+
+

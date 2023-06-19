@@ -1,15 +1,18 @@
+
 from rest_framework import status, generics
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from .serializers import UserSerializer, StudentSerializer, ParentUserSerializer, ParentSerializer, StaffSerializer
 from .models import User, Student, Staff, Parent
+
 # Create your views here.
 
 # Student View
-class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
 
     def create(self, request, *args, **kwargs):
         student_data = request.data.copy()
@@ -55,6 +58,7 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
     def patch(self, request, *args, **kwargs):
         student = self.get_object()
         student_serializer = StudentSerializer(instance=student, data=request.data, partial=True)
+
 
         if student_serializer.is_valid(raise_exception=True):
             student_serializer.save()
@@ -133,9 +137,11 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
 
 
 class ParentView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
+
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
     lookup_field = 'parent_id'
+
 
     # Modify parent details
     def patch(self, request, *args, **kwargs):

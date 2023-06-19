@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Student URLs
+
     path('students/', StudentView.as_view(), name='student-list'),
     path('students/<uuid:pk>/', StudentView.as_view(), name='student-detail'),
 
@@ -33,5 +35,4 @@ urlpatterns = [
     path('staff/', StaffView.as_view(), name='staff-list'),
     path('staff/<uuid:pk>/', StaffView.as_view(), name='staff-detail'),
 
-        
 ]
