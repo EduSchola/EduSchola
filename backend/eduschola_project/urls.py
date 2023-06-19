@@ -16,31 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eduschola_project.edusch_app.views import StudentViewSet, ParentViewSet, StaffViewSet
+from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Student URLs
-    path('students/', StudentViewSet.as_view({'post': 'create_student'}), name='student-create'),
-    path('students/<uuid:student_id>/', StudentViewSet.as_view({'delete': 'delete_student'}), name='student-details'),
-    path('students/<uuid:student_id>/', StudentViewSet.as_view({'patch': 'modify_student'}), name='student-details'),
-    path('students/<uuid:student_id>/', StudentViewSet.as_view({'get': 'get_student'}), name='modify-student-details'),
-    path('students/', StudentViewSet.as_view({'get': 'get_all_students'}), name='all-student'),
-    
+    path('students/', StudentView.as_view(), name='student-list'),
+    path('students/<uuid:pk>/', StudentView.as_view(), name='student-detail'),
+
     # Parent URLs
-    path('parents/<uuid:parent_id>/', ParentViewSet.as_view({'patch': 'modify_parent'}), name='parent-details'),
-    path('parents/<uuid:parent_id>/', ParentViewSet.as_view({'delete': 'delet_-parent'}), name='parent-details'),
-    # path('parents/', ParentViewSet.as_view({'post': 'create_parent'}), name='create-parents'),
-    path('parents/<uuid:parent_id>/', ParentViewSet.as_view({'get': 'get_parent'}), name='modify-staff-details'),
-    path('parents/', ParentViewSet.as_view({'get': 'get_all_parent'}), name='all-staff'),
+    path('parents/', ParentView.as_view(), name='parent-list'),
+    path('parents/<uuid:pk>/', ParentView.as_view(), name='parent-detail'),
 
     # Staff URLs     
-    path('staff/', StaffViewSet.as_view({'post': 'create_staff'}), name='create-staff'),
-    path('staff/<uuid:staff_id>/', StaffViewSet.as_view({'get': 'get_staff'}), name='staff-details'),
-    path('staff/<uuid:staff_id>/', StaffViewSet.as_view({'delete': 'delete_staff'}), name='delete-staff-details'),
-    path('staff/<uuid:staff_id>/', StaffViewSet.as_view({'patch': 'modify_staff'}), name='modify-staff-details'),
-    path('staff/', StaffViewSet.as_view({'get': 'get_all_staff'}), name='all-staff'),
-       
+    path('staff/', StaffView.as_view(), name='staff-list'),
+    path('staff/<uuid:pk>/', StaffView.as_view(), name='staff-detail'),
+
         
 ]
