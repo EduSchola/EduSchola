@@ -4,9 +4,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
-
-from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, SchoolSerializer
-from .models import User, Student, Instructor, Parent, School
+from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, SchoolSerializer, AssignmentSerializer
+from .models import User, Student, Instructor, Parent, School, Assignment
 
 
 # Create your views here.
@@ -163,8 +162,16 @@ class CreateSchoolApiView(APIView):
             return Response({'error': e.detail}, status=HTTP_400_BAD_REQUEST)
 
 
+class CreateAssignmentApiView(generics.CreateAPIView):
+    serializer_class = AssignmentSerializer
 
 
+class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+    lookup_field = 'id'  #lookup_field is the field that is used to retrieve the object
 
-
+class ListAssignmentApiView(generics.ListAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
 
