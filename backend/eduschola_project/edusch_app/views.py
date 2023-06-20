@@ -151,20 +151,8 @@ class InstructorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView)
         return super().update(request, *args, **kwargs)
 
 
-class CreateSchoolApiView(APIView):
-    def post(self, request):
-
-        try:
-            serializer_class = SchoolSerializer(data=request.data)
-            serializer_class.is_valid(raise_exception=True)
-            serializer_class.save()
-            return Response(serializer_class.data, status=HTTP_201_CREATED)
-        except ValidationError as e:
-            return Response({'error': e.detail}, status=HTTP_400_BAD_REQUEST)
-
-
-
-
-
+class CreateSchoolApiView(generics.CreateAPIView):
+    serializer_class = SchoolSerializer
+    queryset = School.objects.all()
 
 
