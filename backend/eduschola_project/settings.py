@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eduschdb',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'Oluwatomiwa2020',
         'HOST': 'localhost',
         'PORT': '5432',
     }
