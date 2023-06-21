@@ -155,11 +155,4 @@ class CreateSchoolApiView(generics.CreateAPIView):
     serializer_class = SchoolSerializer
     queryset = School.objects.all()
 
-    def post(self, request, *args, **kwargs):
-        try:
-            serializer = SchoolSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=HTTP_201_CREATED)
-        except ValidationError as error:
-            return Response({'error': error.detail}, status=HTTP_400_BAD_REQUEST)
+
