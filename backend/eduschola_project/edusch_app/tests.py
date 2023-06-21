@@ -44,7 +44,7 @@ class EduScholaViewTestCase(TestCase):
         response = self.client.post(self.student_url, self.valid_student_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Student.objects.count(), 1)
-        self.assertEqual(Student.objects.get().user.username, 'student80')
+        self.assertEqual(Student.objects.get().user.username, 'student81')
 
     def test_create_student_failure(self):
         # Simulate a failed request by removing required fields from the payload

@@ -7,7 +7,7 @@ from .models import User, Student, Staff, Parent
 # Create your views here.
 
 # Student View
-class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 

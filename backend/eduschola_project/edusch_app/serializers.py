@@ -35,4 +35,4 @@ class StaffSerializer(serializers.ModelSerializer):
     # school = SchoolSerializer(read_only=True)
     class Meta:
         model = Staff
-        fields = ['staff_id', 'user', 'qualification', 'tel', 'email', 'address', 'school', 'subjects', 'staff_role']
+        fields = ['staff_id', 'user', 'phone', 'email', 'address', 'school', 'subjects', 'staff_role']

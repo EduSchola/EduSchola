@@ -31,7 +31,7 @@ class Assignment(models.Model):
     description = models.TextField()
     issue_date = models.DateTimeField(default=timezone.now)
     due_date = models.DateTimeField()
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)  # Many-to-One relationship with Course model
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Many-to-One relationship with Course model
 
     def __str__(self):
         return self.title
@@ -41,7 +41,7 @@ class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL)  # Many-to-One relationship with Course model (optional)
+    course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.CASCADE)  # Many-to-One relationship with Course model (optional)
     is_school_wide = models.BooleanField(default=False)  # Indicates if the announcement is school-wide
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Grade(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     term = models.CharField(max_length=255, default='')
     session = models.CharField(max_length=255, default='')
-    grade = models.FloatField(default=0)
+    gradeScore = models.FloatField(default=0)
 
     def __str__(self):
         return f"Grade {self.grade_id} - Staff: {self.staff}, Student: {self.student}, Course: {self.course}"
@@ -67,7 +67,7 @@ class Student(models.Model):
     phone_number = models.TextField()
     address = models.TextField()
     parent = models.ForeignKey('Parent', on_delete=models.SET_NULL, null=True, blank=True)
-    school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)  # Many-to-One relationship with School model    
+    school = models.ForeignKey(School, on_delete=models.CASCADE)  # Many-to-One relationship with School model    
 
     def delete(self, *args, **kwargs):
         # Delete associated User instance
@@ -82,7 +82,6 @@ class Student(models.Model):
 class Staff(models.Model):
     staff_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField('User', on_delete=models.CASCADE, null=True, related_name='staff_user')
-    qualification = models.CharField(max_length=255)
     tel = models.CharField(max_length=25, default='')
     email = models.EmailField(default='')
     address = models.TextField()
@@ -104,7 +103,7 @@ class Staff(models.Model):
 class Parent(models.Model):
     parent_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField('User', on_delete=models.CASCADE, null=True, related_name='parent_user')    
-    tel = models.CharField(max_length=25, default='')
+    phone = models.CharField(max_length=25, default='')
     email = models.EmailField(default='')
     address = models.TextField()
 
