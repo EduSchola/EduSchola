@@ -20,6 +20,7 @@ from eduschola_project.edusch_app.views import StudentListCreateView, StudentRet
     CreateSchoolApiView
 from eduschola_project.edusch_app.views import InstructorListCreateView, InstructorRetrieveUpdateDestroyView
 from eduschola_project.edusch_app.views import ParentListCreateView, ParentRetrieveUpdateDestroyView
+from edusch_app.views import CreateAssignmentApiView, AssignmentApiView, ListAssignmentApiView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +38,10 @@ urlpatterns = [
     path('parents/<uuid:pk>/', ParentRetrieveUpdateDestroyView.as_view(), name='parent-retrieve-update-destroy'),
 
     # School URLs
-    path('school/', CreateSchoolApiView.as_view(), name='create-school')
+    path('school/', CreateSchoolApiView.as_view(), name='create-school'),
+
+    # Assignment URLs
+    path('assignments/', CreateAssignmentApiView.as_view(), name='assignment-create'),
+    path('assignments/<uuid:id>/', AssignmentApiView.as_view(), name='assignment-retrieve-update-delete'),
+    path('assignments/list/', ListAssignmentApiView.as_view(), name='assignment-list'),
 ]
