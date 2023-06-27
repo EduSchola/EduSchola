@@ -77,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eduschdb',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'Oluwatomiwa2020',
         'HOST': 'localhost',
         'PORT': '5432',
     }

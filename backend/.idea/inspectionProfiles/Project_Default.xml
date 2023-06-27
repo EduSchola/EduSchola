@@ -36,6 +36,7 @@
           <option value="N802" />
           <option value="N803" />
           <option value="N813" />
+          <option value="N806" />
         </list>
       </option>
     </inspection_tool>
@@ -44,6 +45,10 @@
         <list>
           <option value="bool.append" />
           <option value="wallet.wallet.api.urls" />
+          <option value="class_assignment.heart_rates" />
+          <option value="int.split" />
+          <option value="int.__getitem__" />
+          <option value="int.append" />
         </list>
       </option>
     </inspection_tool>

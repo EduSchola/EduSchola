@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Student, Parent, Instructor, User, Course, School
+from .models import Student, Parent, Instructor, User, School, Assignment
+
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -32,10 +34,23 @@ class InstructorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = '__all__'
 
 
+
+class SchoolSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = School
+        fields = ['school_id', 'name', 'address', 'contact_information']
+
+
+class AssignmentSerializer(serializers.ModelSerializer):    
+        class Meta:
+            model = Assignment
+            fields = '__all__'
 

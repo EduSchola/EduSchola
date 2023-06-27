@@ -13,6 +13,13 @@ from rest_framework.viewsets import ModelViewSet
 
 from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, CourseSerializer
 from .models import User, Student, Instructor, Parent, Course
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+from .serializers import UserSerializer, StudentSerializer, ParentSerializer, InstructorSerializer, SchoolSerializer, AssignmentSerializer
+from .models import User, Student, Instructor, Parent, School, Assignment
+
 
 
 # Create your views here.
@@ -157,6 +164,7 @@ class InstructorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView)
         return super().update(request, *args, **kwargs)
 
 
+
 # create or get all  course
 @api_view(['POST', 'GET'])
 def create_or_list_all_courses(request):
@@ -188,3 +196,23 @@ def get_update_delete_courseDetail(request, pk):
     if request.method == 'DELETE':
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CreateAssignmentApiView(generics.CreateAPIView):
+    serializer_class = AssignmentSerializer
+
+
+class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+    lookup_field = 'id'  #lookup_field is the field that is used to retrieve the object
+
+class ListAssignmentApiView(generics.ListAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+
+class CreateSchoolApiView(generics.CreateAPIView):
+    serializer_class = SchoolSerializer
+    queryset = School.objects.all()
+
+
+
