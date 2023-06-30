@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import Group
-from .models import Student, Parent, Staff, User, School, Grade
+from .models import Student, Parent, Staff, User, School, Grade, Assignment
+
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -42,6 +43,13 @@ class StaffSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     # school = SchoolSerializer(read_only=True)
     class Meta:
+
         model = Staff
         fields = ['staff_id', 'user', 'phone', 'email', 'address', 'school', 'subjects', 'staff_role']
 
+
+class AssignmentSerializer(serializers.ModelSerializer):
+    
+        class Meta:
+            model = Assignment
+            fields = '__all__'

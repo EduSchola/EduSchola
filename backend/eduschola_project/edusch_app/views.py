@@ -1,10 +1,12 @@
 
-from rest_framework import status, generics
-from django.shortcuts import get_object_or_404
-from rest_framework.exceptions import NotFound
+from django.shortcuts import render, get_object_or_404
+from rest_framework import generics, status
+from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.response import Response
-from .serializers import UserSerializer, StudentSerializer, ParentUserSerializer, ParentSerializer, StaffSerializer
-from .models import User, Student, Staff, Parent
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+from .serializers import UserSerializer, StudentSerializer, ParentUserSerializer, ParentSerializer, StaffSerializer, AssignmentSerializer, SchoolSerializer
+from .models import User, Student, Staff, Parent, School, Assignment
 
 # Create your views here.
 
@@ -124,16 +126,6 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
             'success': True,
             'data': student_serializer.data
         }, status=status.HTTP_200_OK)
-
-    # # Retrieve all students details
-    # def list(self, request, *args, **kwargs):
-    #     queryset = self.filter_queryset(self.get_queryset())
-    #     student_serializer = self.get_serializer(queryset, many=True)
-
-    #     return Response({
-    #         'success': True,
-    #         'data': student_serializer.data
-    #     }, status=status.HTTP_200_OK)
 
 
 class ParentView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
@@ -357,3 +349,22 @@ class StaffView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destroy
                 'success': False,
                 'message': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CreateAssignmentApiView(generics.CreateAPIView):
+    serializer_class = AssignmentSerializer
+
+
+class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+    lookup_field = 'id'  #lookup_field is the field that is used to retrieve the object
+
+class ListAssignmentApiView(generics.ListAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+
+class CreateSchoolApiView(generics.CreateAPIView):
+    serializer_class = SchoolSerializer
+    queryset = School.objects.all()
+
