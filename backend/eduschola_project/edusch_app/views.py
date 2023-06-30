@@ -43,7 +43,7 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
             return Response({
                 'success': True,
                 'data': student_serializer.data
-            }, status=status.HTTP_200_OK)
+            }, status=status.HTTP_201_OK)
 
         return Response({
             'success': False,
@@ -238,7 +238,7 @@ class StaffView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destroy
                 return Response({
                     'success': True,
                     'data': staff_serializer.data
-                }, status=status.HTTP_200_OK)
+                }, status=status.HTTP_201_OK)
 
             return Response({
                 'success': False,
