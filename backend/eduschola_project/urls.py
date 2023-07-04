@@ -16,26 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eduschola_project.edusch_app.views import StudentListCreateView, StudentRetrieveUpdateDestroyView, \
-    CreateSchoolApiView
-from eduschola_project.edusch_app.views import InstructorListCreateView, InstructorRetrieveUpdateDestroyView
-from eduschola_project.edusch_app.views import ParentListCreateView, ParentRetrieveUpdateDestroyView
+from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView
 from edusch_app.views import CreateAssignmentApiView, AssignmentApiView, ListAssignmentApiView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Student URLs
-    path('students/', StudentListCreateView.as_view(), name='student-list-create'),
-    path('students/<uuid:pk>/', StudentRetrieveUpdateDestroyView.as_view(), name='student-retrieve-update-destroy'),
 
-    # Instructor URLs
-    path('instructors/', InstructorListCreateView.as_view(), name='instructor-list-create'),
-    path('instructors/<uuid:pk>/', InstructorRetrieveUpdateDestroyView.as_view(),
-         name='instructor-retrieve-update-destroy'),
+    path('students/', StudentView.as_view(), name='student-list'),
+    path('students/<uuid:pk>/', StudentView.as_view(), name='student-detail'),
 
     # Parent URLs
-    path('parents/', ParentListCreateView.as_view(), name='parent-list-create'),
-    path('parents/<uuid:pk>/', ParentRetrieveUpdateDestroyView.as_view(), name='parent-retrieve-update-destroy'),
+    path('parents/', ParentView.as_view(), name='parent-list'),
+    path('parents/<uuid:pk>/', ParentView.as_view(), name='parent-detail'),
+
+    # Staff URLs     
+    path('staff/', StaffView.as_view(), name='staff-list'),
+    path('staff/<uuid:pk>/', StaffView.as_view(), name='staff-detail'),
+
 
     # School URLs
     path('school/', CreateSchoolApiView.as_view(), name='create-school'),
@@ -44,4 +43,5 @@ urlpatterns = [
     path('assignments/', CreateAssignmentApiView.as_view(), name='assignment-create'),
     path('assignments/<uuid:id>/', AssignmentApiView.as_view(), name='assignment-retrieve-update-delete'),
     path('assignments/list/', ListAssignmentApiView.as_view(), name='assignment-list'),
+
 ]
