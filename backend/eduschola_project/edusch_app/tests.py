@@ -1,4 +1,3 @@
-
 import unittest
 from django.urls import reverse
 
@@ -11,6 +10,7 @@ from django.utils import timezone
 from rest_framework import status
 from .serializers import StudentSerializer
 from .views import StudentView, ParentView, StaffView
+
 
 class EduScholaViewTestCase(TestCase):
     def setUp(self):
@@ -45,12 +45,14 @@ class EduScholaViewTestCase(TestCase):
 
         pass
 
+
 class AssignmentModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
         Course.objects.create(name='Test Course', description='Description')
-        Assignment.objects.create(title='Test Assignment', description='Description', issue_date=timezone.now(), due_date=timezone.now() + timezone.timedelta(days=7), course=Course.objects.get(id=1))
+        Assignment.objects.create(title='Test Assignment', description='Description', issue_date=timezone.now(),
+                                  due_date=timezone.now() + timezone.timedelta(days=7), course=Course.objects.get(id=1))
 
     def test_issue_date_not_in_past(self):
         assignment = Assignment.objects.get(id=1)
@@ -59,9 +61,6 @@ class AssignmentModelTest(TestCase):
     def test_due_date_after_issue_date(self):
         assignment = Assignment.objects.get(id=1)
         self.assertTrue(assignment.due_date > assignment.issue_date)
-
-
-
 
     def test_create_student_success(self):
         response = self.client.post(self.student_url, self.valid_student_payload, format='json')
@@ -76,8 +75,8 @@ class AssignmentModelTest(TestCase):
         response = self.client.post(self.student_url, invalid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Student.objects.count(), 0)
-    
-       
+
+
 class CreateSchoolAPITestCase(TestCase):
 
     def test_that_school_is_created(self):
@@ -98,20 +97,20 @@ class CreateSchoolAPITestCase(TestCase):
             'address': '',
         }
 
-        response = self.client.post(url,data,format='json')
-        self.assertEqual(response.status_code,status.HTTP_400_BAD_REQUEST)
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class AssignmentTests(APITestCase):
-    
-    def setUp(self): # this method runs before each test
+
+    def setUp(self):  # this method runs before each test
         self.assignment1 = Assignment.objects.create(
             title='Test Assignment 1',
             description='This is a test assignment',
             issue_date=timezone.now(),
             due_date=timezone.now() + datetime.timedelta(days=7),
         )
-        
+
         self.assignment2 = Assignment.objects.create(
             title='Test Assignment 2',
             description='This is another test assignment',
@@ -120,10 +119,9 @@ class AssignmentTests(APITestCase):
         )
 
     def test_create_assignment(self):
-        
-        #Ensure we can create a new assignment.
-        
-        url = reverse('assignment-list')   
+        # Ensure we can create a new assignment.
+
+        url = reverse('assignment-list')
         data = {
             'title': 'Test Assignment',
             'description': 'This is a test assignment',
@@ -140,7 +138,8 @@ class AssignmentTests(APITestCase):
         """
         Ensure we can retrieve an assignment.
         """
-        url = reverse('assignment-retrieve-update-delete', kwargs={'pk': self.assignment1.pk})  # replace with your URL name
+        url = reverse('assignment-retrieve-update-delete',
+                      kwargs={'pk': self.assignment1.pk})  # replace with your URL name
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['title'], self.assignment1.title)
@@ -149,7 +148,8 @@ class AssignmentTests(APITestCase):
         """
         Ensure we can update an assignment.
         """
-        url = reverse('assignment-retrieve-update-delete', kwargs={'pk': self.assignment1.pk})  # replace with your URL name
+        url = reverse('assignment-retrieve-update-delete',
+                      kwargs={'pk': self.assignment1.pk})  # replace with your URL name
         data = {
             'title': 'Updated Assignment',
             'description': 'This is an updated test assignment',
@@ -163,8 +163,45 @@ class AssignmentTests(APITestCase):
         """
         Ensure we can delete an assignment.
         """
-        url = reverse('assignment-retrieve-update-delete', kwargs={'pk': self.assignment1.pk})  # replace with your URL name
+        url = reverse('assignment-retrieve-update-delete',
+                      kwargs={'pk': self.assignment1.pk})  # replace with your URL name
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Assignment.objects.count(), 1)
 
+
+class CourseTests(APITestCase):
+
+    def setUp(self):  # this method runs before each test
+
+        self.course1 = Course.objects.create(
+            name='Test course 1',
+            description='This is a test course'
+        )
+
+        self.course2 = Course.objects.create(
+            name='Test course 2',
+            description='This is a test course 2'
+        )
+
+    def test_create_course(self):
+        # create a new course.
+
+        url = reverse('course-create')
+        data = {
+            'name': 'Test Course',
+            'description': 'This is a test course',
+
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_retrieve_course(self):
+        """
+        Ensure we can retrieve a course.
+        """
+        url = reverse('course-detail-update-delete',
+                      kwargs={'pk': self.course1.pk})  # replace with your URL name
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['name'], self.course1.name)

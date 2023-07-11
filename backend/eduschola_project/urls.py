@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView
+from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView, CreateCourseApiView, \
+    ListAllCourseApiView, DetailUpdateDeleteCourseApiView, CreateSchoolApiView
 from edusch_app.views import CreateAssignmentApiView, AssignmentApiView, ListAssignmentApiView
 
 
@@ -43,5 +44,10 @@ urlpatterns = [
     path('assignments/', CreateAssignmentApiView.as_view(), name='assignment-create'),
     path('assignments/<uuid:id>/', AssignmentApiView.as_view(), name='assignment-retrieve-update-delete'),
     path('assignments/list/', ListAssignmentApiView.as_view(), name='assignment-list'),
+
+# Course URLs
+    path('course/', CreateCourseApiView.as_view(), name='course-create'),
+    path('course/all/', ListAllCourseApiView.as_view(), name='course-list'),
+    path('course/<uuid:pk>/', DetailUpdateDeleteCourseApiView.as_view(), name='course-detail-update-delete'),
 
 ]
