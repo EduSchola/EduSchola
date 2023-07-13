@@ -1,20 +1,21 @@
-
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, status
 from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
-from .serializers import UserSerializer, StudentSerializer, ParentUserSerializer, ParentSerializer, StaffSerializer, AssignmentSerializer, SchoolSerializer
-from .models import User, Student, Staff, Parent, School, Assignment
+from .serializers import UserSerializer, StudentSerializer, ParentUserSerializer, ParentSerializer, StaffSerializer, \
+    AssignmentSerializer, SchoolSerializer, CourseSerializer
+from .models import User, Student, Staff, Parent, School, Assignment, Course
+
 
 # Create your views here.
 
 # Student View
-class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
+class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView,
+                  generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-
 
     def create(self, request, *args, **kwargs):
         student_data = request.data.copy()
@@ -27,10 +28,10 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
         student_serializer = StudentSerializer(data=student_data)
 
         if (
-            user_serializer.is_valid(raise_exception=True)
-            and parent_user_serializer.is_valid(raise_exception=True)
-            and parent_serializer.is_valid(raise_exception=True)
-            and student_serializer.is_valid(raise_exception=True)
+                user_serializer.is_valid(raise_exception=True)
+                and parent_user_serializer.is_valid(raise_exception=True)
+                and parent_serializer.is_valid(raise_exception=True)
+                and student_serializer.is_valid(raise_exception=True)
         ):
             user = user_serializer.save()
 
@@ -61,7 +62,6 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
         student = self.get_object()
         student_serializer = StudentSerializer(instance=student, data=request.data, partial=True)
 
-
         if student_serializer.is_valid(raise_exception=True):
             student_serializer.save()
 
@@ -79,7 +79,7 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
             'success': False,
             'data': student_serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
-    
+
     # delete student details
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -128,12 +128,11 @@ class StudentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
         }, status=status.HTTP_200_OK)
 
 
-class ParentView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
-
+class ParentView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView,
+                 generics.ListAPIView):
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
     lookup_field = 'parent_id'
-
 
     # Modify parent details
     def patch(self, request, *args, **kwargs):
@@ -205,8 +204,10 @@ class ParentView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView, generi
                 'message': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
 
+
 # Staff Views
-class StaffView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView, generics.ListAPIView):
+class StaffView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView, generics.RetrieveAPIView,
+                generics.ListAPIView):
     serializer_class = StaffSerializer
 
     # Create new staff
@@ -219,8 +220,8 @@ class StaffView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destroy
             staff_serializer = self.get_serializer(data=staff_data)
 
             if (
-                user_serializer.is_valid(raise_exception=True)
-                and staff_serializer.is_valid(raise_exception=True)
+                    user_serializer.is_valid(raise_exception=True)
+                    and staff_serializer.is_valid(raise_exception=True)
             ):
                 user = user_serializer.save()  # Save the User instance
 
@@ -358,13 +359,34 @@ class CreateAssignmentApiView(generics.CreateAPIView):
 class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
-    lookup_field = 'id'  #lookup_field is the field that is used to retrieve the object
+    lookup_field = 'id'  # lookup_field is the field that is used to retrieve the object
+
 
 class ListAssignmentApiView(generics.ListAPIView):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
 
+
 class CreateSchoolApiView(generics.CreateAPIView):
     serializer_class = SchoolSerializer
     queryset = School.objects.all()
 
+
+# create course:
+class CreateCourseApiView(generics.CreateAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+
+# list all courses:
+class ListAllCourseApiView(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+
+# get, update or delete a single course
+class DetailUpdateDeleteCourseApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    # lookup_field is the field that is used to retrieve the object
+    lookup_field = 'pk'
