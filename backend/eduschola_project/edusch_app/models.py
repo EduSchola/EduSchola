@@ -30,20 +30,27 @@ class Course(models.Model):
 
 class Grade(models.Model):
     grade_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)  # Many-to-One relationship with School model
+    staff = models.ForeignKey('Staff', on_delete=models.SET_NULL, null=True)
+    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
+    term = models.CharField(max_length=255, default='')
+    session = models.CharField(max_length=255, default='')
+    gradeScore = models.FloatField(default=0)
 
     def __str__(self):
-        return self.name
-
+        return f"Grade {self.grade_id} - Staff: {self.staff}, Student: {self.student}, Course: {self.course}"
+    
 class Assignment(models.Model):
+    assignment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
     issue_date = models.DateTimeField(default=timezone.now)
     due_date = models.DateTimeField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Many-to-One relationship with Course model
-    grade = models.ForeignKey(Grade, on_delete=models.CASCADE)  # Many-to-One relationship with Grade model. Indicating the grade level of the assignment
-
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=uuid.uuid4)  # Many-to-One relationship with Course model
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE, default=uuid.uuid4)  # Many-to-One relationship with Grade model. Indicating the grade level of the assignment
+    
+    
+    
     def __str__(self):
         return self.title
     
@@ -60,11 +67,6 @@ class Assignment(models.Model):
         self.clean() 
         return super().save(*args, **kwargs)
 
-
-
-
-
-
 class Announcement(models.Model):
     announcement_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
@@ -77,17 +79,7 @@ class Announcement(models.Model):
         return self.title
 
 
-class Grade(models.Model):
-    grade_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    staff = models.ForeignKey('Staff', on_delete=models.SET_NULL, null=True)
-    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    term = models.CharField(max_length=255, default='')
-    session = models.CharField(max_length=255, default='')
-    gradeScore = models.FloatField(default=0)
 
-    def __str__(self):
-        return f"Grade {self.grade_id} - Staff: {self.staff}, Student: {self.student}, Course: {self.course}"
 
 
 class Student(models.Model):

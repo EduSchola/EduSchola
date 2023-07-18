@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from eduschola_project.edusch_app.views import StudentView, ParentView, StaffView, CreateCourseApiView, \
     ListAllCourseApiView, DetailUpdateDeleteCourseApiView, CreateSchoolApiView
-from edusch_app.views import CreateAssignmentApiView, AssignmentApiView, ListAssignmentApiView
+from eduschola_project.edusch_app.views import CreateAssignmentApiView, AssignmentApiView, ListAssignmentApiView
+
 
 
 urlpatterns = [
