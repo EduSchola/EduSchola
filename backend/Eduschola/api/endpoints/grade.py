@@ -47,13 +47,13 @@ class GradeView(generics.CreateAPIView,
     #         'data': grade_serializer.data
     #     }, statuss=status.HTTP_200_OK)
         
-class GradeDeleteUpdateRetrieveView(generics.DestryoAPIView,
+class GradeDeleteUpdateRetrieveView(generics.DestroyAPIView,
                                     generics.UpdateAPIView,
                                     generics.RetrieveAPIView):
     
     queryset = Grade.objects.all()
     serializer_class = GradeSerializer
-    lookup_field =' pk'
+    lookup_field ='pk'
 
     def delete(self, request, *args, **kwargs):
         try:

@@ -22,8 +22,8 @@ urlpatterns = [
     # ---------------staff url end----------------------------
 
        # ---------------grade url start--------------------------
-    path('grade/', GradeView.as_view(), name='staff-list'),
-    path('grade/<uuid:pk>/', GradeDeleteUpdateRetrieveView.as_view(), name='staff-retrieve'),
+    path('grade/', GradeView.as_view(), name='grade-list'),
+    path('grade/<uuid:pk>/', GradeDeleteUpdateRetrieveView.as_view(), name='grade-retrieve'),
     # ---------------grade url end-------------------------------
     path('' , RedirectView.as_view(url='/'))
 ]
