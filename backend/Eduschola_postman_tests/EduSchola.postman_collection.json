@@ -371,6 +371,123 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grade/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Transfer-Encoding",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"staff\": \"67652474-ad08-4634-b432-0e0d8693e3d0\",  \n  \"student\": \"523a7356-287c-415b-a561-f0d0f678ccbe\",\n  \"course\": \"\",\n  \"term\": \"First\",\n  \"session\": \"2023-2024\",\n  \"gradeScore\": 85.5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/grade/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grade",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gradeScore\":90\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grade",
+						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grade",
+						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grade",
+						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
