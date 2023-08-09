@@ -1,45 +1,34 @@
-## Setup
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Before you start, make sure you have these prerequisites installed:
+## Getting Started
 
-- Node.js
-- npm/Yarn
+First, run the development server:
 
-### Installation
-
-1. Clone the repository
-
-git clone https://github.com/EduSchola/Eduschola.git
-
-2. Change to the project directory
-
-cd fronted/eduschola
-
-3. Install dependencies
-
-npm install
-// or
-yarn install
-
-To run the application locally, you can use:
-
+```bash
 npm run dev
-// or
+# or
 yarn dev
+# or
+pnpm dev
+```
 
-The application will usually start at `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Testing
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-To run the tests, you can use:
-npm run test
-// or
-yarn test
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Building the Application
+## Learn More
 
-To build the application, you can use:
+To learn more about Next.js, take a look at the following resources:
 
-npm run build
-// or
-yarn build
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
