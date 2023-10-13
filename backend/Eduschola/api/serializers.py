@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import Group
-from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade
+from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade, Course
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,7 +21,11 @@ class SchoolSerializer(serializers.ModelSerializer):
         model = School
         fields = ['school_id', 'name', 'address', 'contact_information']
 
-
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = '__all__'
+        
 class ParentUserSerializer(serializers.ModelSerializer):
     user = UserSerializer()  # Nested UserSerializer
 

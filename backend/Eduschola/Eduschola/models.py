@@ -9,7 +9,9 @@ class School(models.Model):
     school_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     address = models.TextField()
-    contact_information = models.CharField(max_length=255)
+    phone = models.CharField(max_length=25, default='')
+    email = models.EmailField(default='')
+    address = models.TextField()
 
     def __str__(self):
         return self.name
@@ -19,7 +21,7 @@ class Course(models.Model):
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    teacher = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)  # Many-to-One relationship with User model (Teacher)
+    teacher = models.ForeignKey('Staff', on_delete=models.SET_NULL, null=True)  # Many-to-One relationship with staff model (Teacher)
     school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)  # Many-to-One relationship with School model
 
     def __str__(self):
