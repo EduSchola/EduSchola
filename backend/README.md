@@ -23,10 +23,15 @@ Below are the available API endpoints for the EduSchola Django project:
 
 ### GET /students
 
-- General:
+- *General*:
   - Returns a list of student objects.
-
-- Sample: $ curl http://127.0.0.1:8000/students/
+```shell
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/students/
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": [
@@ -88,14 +93,19 @@ Below are the available API endpoints for the EduSchola Django project:
         }
     ]
 }
-
+```
 ### GET /students/{student_id}
 
-- General:
+- **General*:
   - Returns the details of a specific student.
   - Requires the `student_id` path parameter.
 
-- Sample: $ curl http://127.0.0.1:8000/students/6b159344-d4fe-4862-82b1-aa0f33a5a398/
+- *Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/students/6b159344-d4fe-4862-82b1-aa0f33a5a398/
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -128,15 +138,18 @@ Below are the available API endpoints for the EduSchola Django project:
         }
     }
 }
+```
 
 ### POST /students
 
-- General:
+- **General*:
   - Creates a new student.
   - Requires a JSON object in the request body with the student details.
   - Returns details of student.
 
-- Sample: $ curl http://127.0.0.1:8000/students -X POST -H "Content-Type:application/json" -d "{
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/students -X POST -H "Content-Type:application/json" -d "{
   "user": {
     "username": "student08",
     "password": "password123",
@@ -163,7 +176,9 @@ Below are the available API endpoints for the EduSchola Django project:
   "address": "456 Avenue, City",
   "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da"
 }"
-
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -187,16 +202,17 @@ Below are the available API endpoints for the EduSchola Django project:
         "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da"
     }
 }
-
+```
 ### PATCH /students/{student_id}
 
-- General:
+- **General*:
   - Updates the details of a specific student.
   - Requires the `student_id` path parameter.
   - Requires a JSON object in the request body with the student details to be updated.
   - Returns the details of student modified with a success value of True.
-
-- Sample: $ curl http://localhost:8000/students/6b159344-d4fe-4862-82b1-aa0f33a5a398/ -X PATCH -H "Content-Type: application/json" -d "{  
+- *Sample Request:*
+```shell
+$ curl http://localhost:8000/api/students/6b159344-d4fe-4862-82b1-aa0f33a5a398/ -X PATCH -H "Content-Type: application/json" -d "{  
   "user": {
     "username": "new_username",
     "email": "new_email@example.com"
@@ -205,7 +221,9 @@ Below are the available API endpoints for the EduSchola Django project:
   "phone_number": "9876543210",
   "address": "456 Avenue, City"
 }"
-
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -229,14 +247,18 @@ Below are the available API endpoints for the EduSchola Django project:
         "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da"
     }
 }
-
+```
 ### GET /staff
 
-- General:
+- **General:*
   - Returns a list of staff objects.
 
-- Sample: $ curl http://127.0.0.1:8000/staff/
-
+- **Sample Request:*
+```shell
+$ curl http://127.0.0.1:8000/api/staff/
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": [
@@ -278,15 +300,18 @@ Below are the available API endpoints for the EduSchola Django project:
         }
     ]
 }
-
+```
 ### GET /staff/{staff_id}
 
-- General:
+- **General:*
   - Returns the details of a specific staff.
   - Requires the `staff_id` path parameter.
 
-- Sample: $ curl http://127.0.0.1:8000/staff/ed250428-0a7b-4845-84a2-ecb26696fea2/
-
+```shell
+- Sample: $ curl http://127.0.0.1:8000/api/staff/ed250428-0a7b-4845-84a2-ecb26696fea2/
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -307,14 +332,16 @@ Below are the available API endpoints for the EduSchola Django project:
         "staff_role": "Updated instructor"
     }
 }
-
+```
 ### POST /staff
 
-- General:
+- **General:*
   - Creates a new staff.
   - Requires a JSON object in the request body with the teacher details.
 
-- Sample: $ curl http://127.0.0.1:8000/staff -X POST -H "Content-Type:application/json" -d "{
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/staff -X POST -H "Content-Type:application/json" -d "{
   "user": {
     "username": "staff_user10",
     "first_name":"staff_firstname",
@@ -330,7 +357,9 @@ Below are the available API endpoints for the EduSchola Django project:
   "staff_role":"Instructor",
   "subjects": []
 }"
-
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -351,15 +380,17 @@ Below are the available API endpoints for the EduSchola Django project:
         "staff_role": "Instructor"
     }
 }
-
+```
 ### PATCH /staff/{staff_id}
 
-- General:
+- **General:*
   - Updates the details of a specific teacher.
   - Requires the `staff_id` path parameter.
   - Requires a JSON object in the request body with the teacher details to be updated.
 
-- Sample: $ curl http://localhost:8000/staff/ed250428-0a7b-4845-84a2-ecb26696fea2/ -X PATCH -H "Content-Type: application/json" -d "{
+- **Sample Request:* 
+```shell
+$ curl http://localhost:8000/api/staff/ed250428-0a7b-4845-84a2-ecb26696fea2/ -X PATCH -H "Content-Type: application/json" -d "{
   "user": {
     "username": "updated_staff_user1",
     "first_name":"updated_staff_firstname",
@@ -375,7 +406,9 @@ Below are the available API endpoints for the EduSchola Django project:
   "staff_role":"Updated instructor",
   "subjects": []
 }"
-
+```
+-  **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -396,14 +429,18 @@ Below are the available API endpoints for the EduSchola Django project:
         "staff_role": "Updated instructor"
     }
 }
-
+```
 ### GET /parents
 
-- General:
+- **General:*
   - Returns a list of parent objects.
 
-- Sample: $ curl http://127.0.0.1:8000/parents/
-
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/parents/
+```
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": [
@@ -444,15 +481,20 @@ Below are the available API endpoints for the EduSchola Django project:
         }
     ]
 }
-
+```
 ### GET /parents/{parent_id}
 
-- General:
+- **General:*
   - Returns the details of a specific parent.
   - Requires the `parent_id` path parameter.
 
-- Sample: $ curl http://127.0.0.1:8000/parents/1a5ca628-b5cf-41ce-b6e2-39a18d2a24d0/
+- **Sample Request:* 
+```shell
+$ curl http://127.0.0.1:8000/api/parents/1a5ca628-b5cf-41ce-b6e2-39a18d2a24d0/
+```
 
+- **Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -469,15 +511,17 @@ Below are the available API endpoints for the EduSchola Django project:
         "address": "123 Street, City"
     }
 }
-
+```
 ### PATCH /parents/{parent_id}
 
-- General:
+- **General:*
   - Updates the details of a specific parent.
   - Requires the `parent_id` path parameter.
   - Requires a JSON object in the request body with the parent details to be updated.
 
-- Sample: $ curl http://localhost:8000/parents/1a5ca628-b5cf-41ce-b6e2-39a18d2a24d0/ -X PATCH -H "Content-Type: application/json" -d "{
+- *Sample Request:
+```shell
+ $ curl http://localhost:8000/api/parents/1a5ca628-b5cf-41ce-b6e2-39a18d2a24d0/ -X PATCH -H "Content-Type: application/json" -d "{
   "first_name": "John",
   "last_name": "Doe",
   "email": "johndoe@example.com",
@@ -486,7 +530,10 @@ Below are the available API endpoints for the EduSchola Django project:
     "password": "newpassword123"
   }
 }"
+```
 
+- *Sample Response:*
+```json
 {
     "success": true,
     "data": {
@@ -496,7 +543,7 @@ Below are the available API endpoints for the EduSchola Django project:
         "address": "123 Street, City"
     }
 }
-
+```
 ## Error Handling
 
 Errors are returned as JSON objects in the following format:
@@ -507,7 +554,7 @@ Errors are returned as JSON objects in the following format:
   "error": 404,
   "message": "Student not found"
 }
-
+```
 The API may return the following error types:
 
 - 404: Not Found

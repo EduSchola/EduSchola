@@ -60,11 +60,37 @@ class ParentView(generics.RetrieveUpdateDestroyAPIView):
             'data': serializer.data
         }, status=status.HTTP_200_OK)
     
-class ParentListView(generics.ListAPIView):
+class ParentCreateListView(generics.CreateAPIView, generics.ListAPIView):
     # Retrieve all parents details
 
     queryset = Parent.objects.all()
     serializer_class = ParentSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            parent_data = request.data.copy()
+            user_data = parent_data.pop('user')
+
+            user_serializer= UserSerializer(data=user_data)
+            parent_serializer = self.get_serializer(data=parent_data)
+
+            user_serializer.is_valid(raise_exception=True)
+            parent_serializer.is_valid(raise_exception=True)
+
+            user = user_serializer.save()
+            parent_data['user'] = user.user_id
+            parent_serializer.save(user=user)
+
+            return Response({
+                'success': True,
+                'data': parent_serializer.data                
+            }, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return Response({
+                'success':False,
+                'message': str(e)
+            }, status = status.HTTP_400_BAD_REQUEST)
 
     def list(self, request, *args, **kwargs):
         try:
