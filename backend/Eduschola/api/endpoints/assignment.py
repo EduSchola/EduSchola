@@ -14,7 +14,7 @@ class CreateAssignmentApiView(generics.CreateAPIView):
 class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
-    lookup_field = 'id'  # lookup_field is the field that is used to retrieve the object
+    lookup_field = 'pk'
 
 
 class ListAssignmentApiView(generics.ListAPIView):

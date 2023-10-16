@@ -21,7 +21,34 @@ To run the EduSchola Django project locally, follow these steps:
 
 Below are the available API endpoints for the EduSchola Django project:
 
-### GET /students
+### POST /schools/create/
+
+- **General*:
+  - Creates a new school.
+  - Requires a JSON object in the request body with the school details.
+  - Returns details of school.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/schools/create -X POST -H "Content-Type:application/json" -d "{
+    "name": "A School somewhere",
+    "address": "123 Main Street, City, Country",
+    "phone": "123-456-7890",
+    "email": "example@email.com"
+}"
+```
+- **Sample Response:*
+```json
+{
+    "school_id": "8686ac90-9ecf-43ce-9398-0da8a20b36f9",
+    "name": "A School somewhere",
+    "address": "123 Main Street, City, Country",
+    "phone": "123-456-7890",
+    "email": "example@email.com"
+}
+```
+
+### GET /students/
 
 - *General*:
   - Returns a list of student objects.
@@ -94,7 +121,7 @@ Below are the available API endpoints for the EduSchola Django project:
     ]
 }
 ```
-### GET /students/{student_id}
+### GET /students/{student_id}/
 
 - **General*:
   - Returns the details of a specific student.
@@ -140,7 +167,7 @@ Below are the available API endpoints for the EduSchola Django project:
 }
 ```
 
-### POST /students
+### POST /students/
 
 - **General*:
   - Creates a new student.
@@ -203,7 +230,7 @@ Below are the available API endpoints for the EduSchola Django project:
     }
 }
 ```
-### PATCH /students/{student_id}
+### PATCH /students/{student_id}/
 
 - **General*:
   - Updates the details of a specific student.
@@ -248,7 +275,7 @@ $ curl http://localhost:8000/api/students/6b159344-d4fe-4862-82b1-aa0f33a5a398/ 
     }
 }
 ```
-### GET /staff
+### GET /staff/
 
 - **General:*
   - Returns a list of staff objects.
@@ -301,7 +328,7 @@ $ curl http://127.0.0.1:8000/api/staff/
     ]
 }
 ```
-### GET /staff/{staff_id}
+### GET /staff/{staff_id}/
 
 - **General:*
   - Returns the details of a specific staff.
@@ -333,7 +360,7 @@ $ curl http://127.0.0.1:8000/api/staff/
     }
 }
 ```
-### POST /staff
+### POST /staff/
 
 - **General:*
   - Creates a new staff.
@@ -381,7 +408,7 @@ $ curl http://127.0.0.1:8000/api/staff/
     }
 }
 ```
-### PATCH /staff/{staff_id}
+### PATCH /staff/{staff_id}/
 
 - **General:*
   - Updates the details of a specific teacher.
@@ -430,6 +457,44 @@ $ curl http://localhost:8000/api/staff/ed250428-0a7b-4845-84a2-ecb26696fea2/ -X 
     }
 }
 ```
+### POST /parents/
+
+- **General*:
+  - Creates a new parent.
+  - Requires a JSON object in the request body with the parent details.
+  - Returns details of parent.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/parents/ -X POST -H "Content-Type:application/json" -d "{
+  "user": {
+    "username": "parent01",
+    "password": "password456",
+    "role": "parent",
+    "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9",
+    "first_name": "Parent",
+    "last_name": "One"
+  },
+  "tel": "1234567890",
+  "email": "jane.smith@example.com",
+  "address": "123 Street, City"
+}
+"
+```
+- **Sample Response:*
+```json
+{
+    "success": true,
+    "data": {
+        "parent_id": "56f44096-0d0f-43f1-ac7e-dd392b174205",
+        "user": "ab1f77fa-4456-47e3-af8f-665584cc049d",
+        "phone": "",
+        "email": "jane.smith@example.com",
+        "address": "123 Street, City"
+    }
+}
+```
+
 ### GET /parents
 
 - **General:*
@@ -544,6 +609,172 @@ $ curl http://127.0.0.1:8000/api/parents/1a5ca628-b5cf-41ce-b6e2-39a18d2a24d0/
     }
 }
 ```
+
+### POST /parents/
+
+- **General*:
+  - Creates a new course.
+  - Requires a JSON object in the request body with the course details.
+  - Returns details of course.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/courses/ -X POST -H "Content-Type:application/json" -d "{
+  "name": "Mathematics",
+  "description": "MAthematics for all classes",
+  "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31", 
+  "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+}
+"
+```
+- **Sample Response:*
+```json
+{
+    "course_id": "e84a1c7c-3d61-4424-a4de-a15c242776c1",
+    "name": "Mathematics",
+    "description": "MAthematics for all classes",
+    "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31",
+    "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+}
+```
+### PATCH /course/{course_id}
+
+- **General:*
+  - Updates the details of a specific course.
+  - Requires the `course_id` path parameter.
+  - Requires a JSON object in the request body with the course details to be updated.
+
+- *Sample Request:
+```shell
+ $ curl http://localhost:8000/api/courses/e84a1c7c-3d61-4424-a4de-a15c242776c1/ -X PATCH -H "Content-Type: application/json" -d "{  
+  "description": "The Senior and Junior Mathematics COurse"
+}
+"
+```
+
+- *Sample Response:*
+```json
+{
+    "course_id": "e84a1c7c-3d61-4424-a4de-a15c242776c1",
+    "name": "Mathematics",
+    "description": "The Senior and Junior Mathematics COurse",
+    "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31",
+    "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+}
+
+```
+### GET /courses/{course_id}/
+
+- **General*:
+  - Returns the details of a specific student.
+  - Requires the `student_id` path parameter.
+
+- *Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/courses/e84a1c7c-3d61-4424-a4de-a15c242776c1/
+```
+- **Sample Response:*
+```json
+{
+    "course_id": "e84a1c7c-3d61-4424-a4de-a15c242776c1",
+    "name": "Mathematics",
+    "description": "The Senior and Junior Mathematics COurse",
+    "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31",
+    "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+}
+```
+### GET /courses/list/
+
+- *General*:
+  - Returns a list of courses objects.
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/courses/list/
+```
+- **Sample Response:*
+```json
+[
+    {
+        "course_id": "e84a1c7c-3d61-4424-a4de-a15c242776c1",
+        "name": "Mathematics",
+        "description": "The Senior and Junior Mathematics COurse",
+        "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+    },
+    {
+        "course_id": "ee85db36-56ec-451a-948f-ffea271640fd",
+        "name": "English Language",
+        "description": "English Langugae for High School",
+        "teacher": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
+    }
+]
+```
+
+### DELETE /courses/{course_id}/
+- *General:*
+- Deletes the corse record with the matching course_id
+- Must include the course_id to be deleted
+
+*Sample Request:*
+```shell
+$ curl -X DELETE http://localhost:8000/api/courses/9a7ed75e-c5c8-4912-9259-ebb45234a209/
+```
+*Sample Response:*
+```json
+{
+    "message": "Course deleted successfully"
+}
+```
+### POST /grades/
+
+- **General*:
+  - Creates a new grade record for student.
+  - Requires a JSON object in the request body with the student and grade details.
+  - Returns details of grade.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/grades/ -X POST -H "Content-Type:application/json" -d {
+  "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",  
+  "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
+  "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+  "term": "First",
+  "session": "2023-2024",
+  "gradeScore": 85.5
+}"
+```
+- **Sample Response:*
+```json
+{
+    "success": true,
+    "data": {
+        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+        "term": "First",
+        "session": "2023-2024",
+        "gradeScore": 85.5,
+        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
+        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
+    }
+}
+```
+### DELETE /grades/{grade_id}/
+- *General:*
+- Deletes the grade record with the matching grade_id
+- Must include the grade_id to be deleted
+
+*Sample Request:*
+```shell
+$ curl -X DELETE http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/
+```
+*Sample Response:*
+```json
+{
+    "success": true,
+    "message": "Grade deleted successfully."
+}
+```
 ## Error Handling
 
 Errors are returned as JSON objects in the following format:
@@ -554,6 +785,85 @@ Errors are returned as JSON objects in the following format:
   "error": 404,
   "message": "Student not found"
 }
+```
+### PATCH /students/{student_id}/
+
+- **General*:
+  - Updates the details of a specific student.
+  - Requires the `grade_id` path parameter.
+  - Requires a JSON object in the request body with the student grade details to be updated.
+  - Returns the details of student modified grade score with a success value of True.
+
+- *Sample Request:*
+```shell
+$ curl http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/ -X PATCH -H "Content-Type: application/json" -d "{
+    "gradeScore":90
+}"
+```
+- **Sample Response:*
+```json
+{
+    "success": true,
+    "message": "Grade score updated successfully.",
+    "data": {
+        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+        "term": "First",
+        "session": "2023-2024",
+        "gradeScore": 90.0,
+        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
+        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
+    }
+}
+```
+### GET /grades/{grade_id}
+
+- **General:*
+  - Returns the details of a specific grade.
+  - Requires the `grade_id` path parameter.
+
+- **Sample Request:* 
+```shell
+$ curl http://127.0.0.1:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/
+```
+
+- **Sample Response:*
+```json
+{
+    "success": true,
+    "data": {
+        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+        "term": "First",
+        "session": "2023-2024",
+        "gradeScore": 90.0,
+        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
+        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
+    }
+}
+```
+### GET /students/
+
+- *General*:
+  - Returns a list of student grades for current session and term.
+```shell
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/grades/
+```
+- **Sample Response:*
+```json
+[
+    {
+        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+        "term": "First",
+        "session": "2023-2024",
+        "gradeScore": 90.0,
+        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
+        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
+        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
+    }
+]
 ```
 The API may return the following error types:
 

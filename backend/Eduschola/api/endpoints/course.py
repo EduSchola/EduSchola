@@ -22,3 +22,8 @@ class DetailUpdateDeleteCourseApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CourseSerializer
     # lookup_field is the field that is used to retrieve the object
     lookup_field = 'pk'
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response({'message': 'Course deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

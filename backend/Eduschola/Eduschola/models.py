@@ -8,7 +8,6 @@ from django.core.exceptions import ValidationError
 class School(models.Model):
     school_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
-    address = models.TextField()
     phone = models.CharField(max_length=25, default='')
     email = models.EmailField(default='')
     address = models.TextField()

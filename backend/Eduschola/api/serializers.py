@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 class SchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ['school_id', 'name', 'address', 'contact_information']
+        fields = ['school_id', 'name', 'address', 'phone', 'email']
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
