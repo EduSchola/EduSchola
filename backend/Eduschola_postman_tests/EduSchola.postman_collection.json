@@ -24,7 +24,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"user\": {\r\n    \"username\": \"student01\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"student\",\r\n    \"school\": \"fe49eb16-92e1-4452-bc58-bff36bd3e4a0\",\r\n    \"first_name\": \"Person\",\r\n    \"last_name\": \"One\"\r\n  },\r\n  \"parent\": {\r\n    \"user\": {\r\n      \"username\": \"parent01\",\r\n      \"password\": \"password456\",\r\n      \"role\": \"parent\",\r\n      \"school\": \"fe49eb16-92e1-4452-bc58-bff36bd3e4a0\",\r\n      \"first_name\": \"Parent\",\r\n      \"last_name\": \"One\"\r\n    },\r\n    \"tel\": \"1234567890\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"address\": \"123 Street, City\"\r\n  },\r\n  \"date_of_birth\": \"2005-01-01\",\r\n  \"phone_number\": \"9876543210\",\r\n  \"address\": \"456 Avenue, City\",\r\n  \"school\": \"fe49eb16-92e1-4452-bc58-bff36bd3e4a0\"\r\n}\r\n"
+					"raw": "{\r\n    \"user\": {\r\n        \"username\": \"johndoe\",\r\n        \"password\": \"password123\",\r\n        \"email\": \"johndoe@example.com\",\r\n        \"role\": \"student\"\r\n    },\r\n    \"date_of_birth\": \"2000-01-15\",\r\n    \"phone_number\": \"123-456-7890\",\r\n    \"address\": \"123 Main St\",\r\n    \"parent\": \"\",\r\n    \"school\": \"8686ac90-9ecf-43ce-9398-0da8a20b36f9\"\r\n}\r\n"
 				},
 				"url": {
 					"raw": "http://localhost:8000/api/students/",
@@ -257,7 +257,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"user\": {\r\n    \"username\": \"staff_user10\",\r\n    \"first_name\":\"staff_firstname\",\r\n    \"last_name\":\"staff_lastname\",\r\n    \"password\": \"staff_password\",\r\n    \"role\": \"staff\"\r\n  },\r\n  \"qualification\": \"Masters in Education\",\r\n  \"tel\": \"1234567890\",\r\n  \"email\": \"staff@example.com\",\r\n  \"address\": \"123 Staff Street\",\r\n  \"school\": \"fe49eb16-92e1-4452-bc58-bff36bd3e4a0\",\r\n  \"staff_role\":\"Instructor\",\r\n  \"subjects\": []\r\n}\r\n"
+					"raw": "{\r\n  \"user\": {\r\n    \"username\": \"staff_user10\",\r\n    \"first_name\":\"staff_firstname\",\r\n    \"last_name\":\"staff_lastname\",\r\n    \"password\": \"staff_password\",\r\n    \"role\": \"staff\"\r\n  },\r\n  \"qualification\": \"Masters in Education\",\r\n  \"tel\": \"1234567890\",\r\n  \"email\": \"staff@example.com\",\r\n  \"address\": \"123 Staff Street\",\r\n  \"school\": \"8686ac90-9ecf-43ce-9398-0da8a20b36f9\",\r\n  \"staff_role\":\"Instructor\",\r\n  \"subjects\": []\r\n}\r\n"
 				},
 				"url": {
 					"raw": "http://localhost:8000/api/staff/",
@@ -385,7 +385,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"staff\": \"67652474-ad08-4634-b432-0e0d8693e3d0\",  \n  \"student\": \"523a7356-287c-415b-a561-f0d0f678ccbe\",\n  \"course\": \"\",\n  \"term\": \"First\",\n  \"session\": \"2023-2024\",\n  \"gradeScore\": 85.5\n}\n",
+					"raw": "{\n  \"staff\": \"a6938ef9-b225-483c-b399-5b723ba34e31\",  \n  \"student\": \"bd1a79db-4cc5-4465-a0c9-f7c7d375f36e\",\n  \"course\": \"18999922-619c-4e30-815d-88a6b38f79f3\",\n  \"term\": \"First\",\n  \"session\": \"2023-2024\",\n  \"gradeScore\": 85.5\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -393,7 +393,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/grade/",
+					"raw": "http://localhost:8000/api/grades/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -401,7 +401,7 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"grade",
+						"grades",
 						""
 					]
 				}
@@ -429,7 +429,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -437,8 +437,8 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"grade",
-						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						"grades",
+						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
 						""
 					]
 				}
@@ -473,7 +473,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -481,8 +481,252 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"grade",
-						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						"grades",
+						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/schools/create/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"A School somewhere\",\n    \"address\": \"123 Main Street, City, Country\",\n    \"phone\": \"123-456-7890\",\n    \"email\": \"example@email.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/schools/create/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"schools",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/parents/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": {\n    \"username\": \"parent01\",\n    \"password\": \"password456\",\n    \"role\": \"parent\",\n    \"school\": \"8686ac90-9ecf-43ce-9398-0da8a20b36f9\",\n    \"first_name\": \"Parent\",\n    \"last_name\": \"One\"\n  },\n  \"tel\": \"1234567890\",\n  \"email\": \"jane.smith@example.com\",\n  \"address\": \"123 Street, City\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/parents/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"parents",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/courses/18178346-9459-4741-b9a9-9403e6f826b0/",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n  \"description\": \"The Senior and Junior Mathematics COurse\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/courses/e84a1c7c-3d61-4424-a4de-a15c242776c1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"courses",
+						"e84a1c7c-3d61-4424-a4de-a15c242776c1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/courses/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"French Language\",\n  \"description\": \"French Langugae for High School\",\n  \"teacher\": \"a6938ef9-b225-483c-b399-5b723ba34e31\", \n  \"school\": \"8686ac90-9ecf-43ce-9398-0da8a20b36f9\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/courses/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/courses/e84a1c7c-3d61-4424-a4de-a15c242776c1/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/courses/e84a1c7c-3d61-4424-a4de-a15c242776c1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"courses",
+						"e84a1c7c-3d61-4424-a4de-a15c242776c1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/courses/list/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/courses/list/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"courses",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/courses/9a7ed75e-c5c8-4912-9259-ebb45234a209/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/courses/9a7ed75e-c5c8-4912-9259-ebb45234a209/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"courses",
+						"9a7ed75e-c5c8-4912-9259-ebb45234a209",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grades/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/grades/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grades",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"grades",
+						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
 						""
 					]
 				}
