@@ -909,7 +909,7 @@ $ curl http://127.0.0.1:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a
 }
 ```
 
-### GET /students/
+### GET /assignment/
 
 - *General*:
   - Returns a dictionary of all assignments issued for a particular grade level and course
@@ -946,6 +946,117 @@ $ curl -X DELETE http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b3
 ```json
 {
     "message": "Assignment deleted successfully"
+}
+```
+### POST /announcement/
+
+- **General*:
+  - Creates a new announcement record
+  - Requires a JSON object in the request body with the details of the announcement
+  - Returns details of announcement.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/announcement/create/ -X POST -H "Content-Type:application/json" -d "{
+    "title": "Your Announcement Title",
+    "content": "Your Announcement Content",
+    "course": "",
+    "is_school_wide": true
+}"
+```
+- **Sample Response:*
+```json
+{
+    "announcement_id": "a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+    "title": "Your Announcement Title",
+    "content": "Your Announcement Content",
+    "date": "2023-10-18T17:38:42.330114Z",
+    "is_school_wide": true,
+    "course": null
+}
+```
+
+### PATCH /announcement/{announcement_id}/
+
+- **General:*
+  - Returns the details of a specific announcement.
+  - Requires the `announcement_id` path parameter.
+
+- **Sample Request:* 
+```shell
+$ curl http://127.0.0.1:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/
+```
+
+- **Sample Response:*
+```json
+{
+    "announcement_id": "a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+    "title": "Your Announcement Title",
+    "content": "You are to assemble immediately after long break at the lab",
+    "date": "2023-10-18T17:38:42.330114Z",
+    "is_school_wide": true,
+    "course": null
+}
+```
+### GET /announcement/{announcement_id}/
+- **General*:
+  - Updates the details of a specific announcement.
+  - Requires the `aannouncement_id` path parameter.
+  - Requires a JSON object in the request body with the announcement details to be updated.
+  - Returns the details of announcement modified with a success value of True.
+
+- *Sample Request:*
+```shell
+$ curl http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/ -X PATCH -H "Content-Type: application/json" -d "{
+    "content":"You are to assemble immediately after long break at the lab"
+}"
+```
+- **Sample Response:*
+```json
+{
+    "announcement_id": "a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+    "title": "Your Announcement Title",
+    "content": "You are to assemble immediately after long break at the lab",
+    "date": "2023-10-18T17:38:42.330114Z",
+    "is_school_wide": true,
+    "course": null
+}
+```
+### GET /announcement/
+
+- *General*:
+  - Returns a dictionary of all announcements
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/announcement/list/
+```
+- **Sample Response:*
+```json
+[
+    {
+        "announcement_id": "a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+        "title": "Your Announcement Title",
+        "content": "You are to assemble immediately after long break at the lab",
+        "date": "2023-10-18T17:38:42.330114Z",
+        "is_school_wide": true,
+        "course": null
+    }
+]
+```
+### DELETE /announcement/{announcement_id}/
+- *General:*
+- Deletes the announcement record with the matching id
+- Must include the announcement_id of record to be deleted
+
+*Sample Request:*
+```shell
+$ curl -X DELETE http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/
+```
+*Sample Response:*
+```json
+{
+    "message": "Announcment deleted successfully"
 }
 ```
 ## Error Handling

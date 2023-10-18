@@ -385,7 +385,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"staff\": \"a6938ef9-b225-483c-b399-5b723ba34e31\",  \n  \"student\": \"bd1a79db-4cc5-4465-a0c9-f7c7d375f36e\",\n  \"course\": \"18999922-619c-4e30-815d-88a6b38f79f3\",\n  \"term\": \"First\",\n  \"session\": \"2023-2024\",\n  \"gradeScore\": 85.5\n}\n",
+					"raw": "{\n  \"grade_name\": \"Grade 2\",\n  \"grade_description\": \"This is the description for Grade 1\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -421,7 +421,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"gradeScore\":90\n}",
+					"raw": "{\n    \"grade_description\": \"This is Grade 1 description\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -429,7 +429,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+					"raw": "http://localhost:8000/api/grades/2ad22136-037a-4b77-af29-d73510f73a9b/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -438,7 +438,7 @@
 					"path": [
 						"api",
 						"grades",
-						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+						"2ad22136-037a-4b77-af29-d73510f73a9b",
 						""
 					]
 				}
@@ -451,7 +451,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/grade/83763ebf-908a-4c45-9fb6-acc501b2cc8b/",
+					"raw": "http://localhost:8000/api/grades/2ad22136-037a-4b77-af29-d73510f73a9b/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -459,8 +459,8 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"grade",
-						"83763ebf-908a-4c45-9fb6-acc501b2cc8b",
+						"grades",
+						"2ad22136-037a-4b77-af29-d73510f73a9b",
 						""
 					]
 				}
@@ -473,7 +473,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+					"raw": "http://localhost:8000/api/grades/2ad22136-037a-4b77-af29-d73510f73a9b/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -482,7 +482,7 @@
 					"path": [
 						"api",
 						"grades",
-						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+						"2ad22136-037a-4b77-af29-d73510f73a9b",
 						""
 					]
 				}
@@ -712,12 +712,22 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+			"name": "http://localhost:8000/api/assignment/create/",
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Homework 1\",\n  \"description\": \"Complete the assigned exercises.\",\n  \"due_date\": \"2023-10-31T23:59:59Z\",\n  \"issue_date\":\"2023-10-18T08:18:59Z\",\n  \"course\": \"18999922-619c-4e30-815d-88a6b38f79f3\",\n  \"grade\": \"aa89027f-11da-4c64-b63f-6c1597cf649d\"\n}\n"
+				},
 				"url": {
-					"raw": "http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/",
+					"raw": "http://localhost:8000/api/assignment/create/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -725,8 +735,241 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"grades",
-						"ebcbf87c-fa90-4194-8dfe-2044f71f3300",
+						"assignment",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"assignment",
+						"f2b37317-e574-4431-b5da-b32102f41b1a",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/assignment/list/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/assignment/list/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"assignment",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"assignment",
+						"f2b37317-e574-4431-b5da-b32102f41b1a",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"due_date\": \"2023-10-30T23:59:59Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"assignment",
+						"f2b37317-e574-4431-b5da-b32102f41b1a",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/announcement/create/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Your Announcement Title\",\n    \"content\": \"Your Announcement Content\",\n    \"course\": \"\",\n    \"is_school_wide\": true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/announcement/create/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"announcement",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\":\"You are to assemble immediately after long break at the lab\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"announcement",
+						"a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"announcement",
+						"a25b55c5-3c8f-4ba6-87fd-185844e94c96",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/announcement/list/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/announcement/list/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"announcement",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/announcement/a25b55c5-3c8f-4ba6-87fd-185844e94c96/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"announcement",
+						"a25b55c5-3c8f-4ba6-87fd-185844e94c96",
 						""
 					]
 				}
