@@ -735,28 +735,18 @@ $ curl -X DELETE http://localhost:8000/api/courses/9a7ed75e-c5c8-4912-9259-ebb45
 
 - **Sample Request:*
 ```shell
- $ curl http://127.0.0.1:8000/api/grades/ -X POST -H "Content-Type:application/json" -d {
-  "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",  
-  "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
-  "course": "18999922-619c-4e30-815d-88a6b38f79f3",
-  "term": "First",
-  "session": "2023-2024",
-  "gradeScore": 85.5
-}"
+ $ curl http://127.0.0.1:8000/api/grades/ -X POST -H "Content-Type:application/json" -d "{
+  "grade_name": "Grade 1",
+  "grade_description": "This is the description for Grade 1"
+}
+"
 ```
 - **Sample Response:*
 ```json
 {
-    "success": true,
-    "data": {
-        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
-        "term": "First",
-        "session": "2023-2024",
-        "gradeScore": 85.5,
-        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
-        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
-        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
-    }
+    "grade_id": "2ad22136-037a-4b77-af29-d73510f73a9b",
+    "grade_name": "Grade 1",
+    "grade_description": "This is the description for Grade 1"
 }
 ```
 ### DELETE /grades/{grade_id}/
@@ -775,6 +765,189 @@ $ curl -X DELETE http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f7
     "message": "Grade deleted successfully."
 }
 ```
+
+### PATCH /students/{student_id}/
+
+- **General*:
+  - Updates the details of a specific student.
+  - Requires the `grade_id` path parameter.
+  - Requires a JSON object in the request body with the student grade details to be updated.
+  - Returns the details of student modified grade details with a success value of True.
+
+- *Sample Request:*
+```shell
+$ curl http://localhost:8000/api/grades/2ad22136-037a-4b77-af29-d73510f73a9b/ -X PATCH -H "Content-Type: application/json" -d "{
+    "grade_description": "This is Grade 1 description"
+}"
+```
+- **Sample Response:*
+```json
+{
+    "grade_id": "2ad22136-037a-4b77-af29-d73510f73a9b",
+    "grade_name": "Grade 1",
+    "grade_description": "This is Grade 1 description"
+}
+```
+
+### GET /grades/{grade_id}
+
+- **General:*
+  - Returns the details of a specific grade.
+  - Requires the `grade_id` path parameter.
+
+- **Sample Request:* 
+```shell
+$ curl http://127.0.0.1:8000/api/grades/2ad22136-037a-4b77-af29-d73510f73a9b/
+```
+
+- **Sample Response:*
+```json
+{
+    "grade_id": "2ad22136-037a-4b77-af29-d73510f73a9b",
+    "grade_name": "Grade 1",
+    "grade_description": "This is Grade 1 description"
+}
+```
+### GET /students/
+
+- *General*:
+  - Returns a dictionary of all grades
+```shell
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/grades/
+```
+- **Sample Response:*
+```json
+[
+    {
+        "grade_id": "2ad22136-037a-4b77-af29-d73510f73a9b",
+        "grade_name": "Grade 1",
+        "grade_description": "This is Grade 1 description"
+    }
+]
+```
+### POST /assignment/
+
+- **General*:
+  - Creates a new assignment record for the grade level and course.
+  - Requires a JSON object in the request body with the details of the assignment
+  - Returns details of assignment.
+
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/assignment/create/ -X POST -H "Content-Type:application/json" -d "{
+  "title": "Homework 1",
+  "description": "Complete the assigned exercises.",
+  "due_date": "2023-10-31T23:59:59Z",
+  "issue_date":"2023-10-18T08:18:59Z",
+  "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+  "grade": "aa89027f-11da-4c64-b63f-6c1597cf649d"
+}
+"
+```
+- **Sample Response:*
+```json
+{
+    "assignment_id": "f2b37317-e574-4431-b5da-b32102f41b1a",
+    "title": "Homework 1",
+    "description": "Complete the assigned exercises.",
+    "issue_date": "2023-10-18T08:18:59Z",
+    "due_date": "2023-10-31T23:59:59Z",
+    "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+    "grade": "aa89027f-11da-4c64-b63f-6c1597cf649d"
+}
+```
+### PATCH /assignment/{assignment_id}/
+
+- **General*:
+  - Updates the details of a specific assignment.
+  - Requires the `assignment_id` path parameter.
+  - Requires a JSON object in the request body with the assignment details to be updated.
+  - Returns the details of assignment modified with a success value of True.
+
+- *Sample Request:*
+```shell
+$ curl http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/ -X PATCH -H "Content-Type: application/json" -d "{
+    "due_date": "2023-10-30T23:59:59Z"
+}"
+```
+- **Sample Response:*
+```json
+{
+    "assignment_id": "f2b37317-e574-4431-b5da-b32102f41b1a",
+    "title": "Homework 1",
+    "description": "Complete the assigned exercises.",
+    "issue_date": "2023-10-18T08:18:59Z",
+    "due_date": "2023-10-30T23:59:59Z",
+    "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+    "grade": "aa89027f-11da-4c64-b63f-6c1597cf649d"
+}
+```
+
+### GET /assignment/{assignment_id}
+
+- **General:*
+  - Returns the details of a specific assignment.
+  - Requires the `assignment_id` path parameter.
+
+- **Sample Request:* 
+```shell
+$ curl http://127.0.0.1:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/
+```
+
+- **Sample Response:*
+```json
+{
+    "assignment_id": "f2b37317-e574-4431-b5da-b32102f41b1a",
+    "title": "Homework 1",
+    "description": "Complete the assigned exercises.",
+    "issue_date": "2023-10-18T08:18:59Z",
+    "due_date": "2023-10-30T23:59:59Z",
+    "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+    "grade": "aa89027f-11da-4c64-b63f-6c1597cf649d"
+}
+```
+
+### GET /students/
+
+- *General*:
+  - Returns a dictionary of all assignments issued for a particular grade level and course
+```shell
+- **Sample Request:*
+```shell
+ $ curl http://127.0.0.1:8000/api/assignment/list/
+```
+- **Sample Response:*
+```json
+[
+    {
+        "assignment_id": "f2b37317-e574-4431-b5da-b32102f41b1a",
+        "title": "Homework 1",
+        "description": "Complete the assigned exercises.",
+        "issue_date": "2023-10-18T08:18:59Z",
+        "due_date": "2023-10-30T23:59:59Z",
+        "course": "18999922-619c-4e30-815d-88a6b38f79f3",
+        "grade": "aa89027f-11da-4c64-b63f-6c1597cf649d"
+    }
+]
+```
+
+### DELETE /assignment/{assignment_id}/
+- *General:*
+- Deletes the assignment record with the matching id
+- Must include the assignment_id to be deleted
+
+*Sample Request:*
+```shell
+$ curl -X DELETE http://localhost:8000/api/assignment/f2b37317-e574-4431-b5da-b32102f41b1a/
+```
+*Sample Response:*
+```json
+{
+    "message": "Assignment deleted successfully"
+}
+```
 ## Error Handling
 
 Errors are returned as JSON objects in the following format:
@@ -785,85 +958,6 @@ Errors are returned as JSON objects in the following format:
   "error": 404,
   "message": "Student not found"
 }
-```
-### PATCH /students/{student_id}/
-
-- **General*:
-  - Updates the details of a specific student.
-  - Requires the `grade_id` path parameter.
-  - Requires a JSON object in the request body with the student grade details to be updated.
-  - Returns the details of student modified grade score with a success value of True.
-
-- *Sample Request:*
-```shell
-$ curl http://localhost:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/ -X PATCH -H "Content-Type: application/json" -d "{
-    "gradeScore":90
-}"
-```
-- **Sample Response:*
-```json
-{
-    "success": true,
-    "message": "Grade score updated successfully.",
-    "data": {
-        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
-        "term": "First",
-        "session": "2023-2024",
-        "gradeScore": 90.0,
-        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
-        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
-        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
-    }
-}
-```
-### GET /grades/{grade_id}
-
-- **General:*
-  - Returns the details of a specific grade.
-  - Requires the `grade_id` path parameter.
-
-- **Sample Request:* 
-```shell
-$ curl http://127.0.0.1:8000/api/grades/ebcbf87c-fa90-4194-8dfe-2044f71f3300/
-```
-
-- **Sample Response:*
-```json
-{
-    "success": true,
-    "data": {
-        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
-        "term": "First",
-        "session": "2023-2024",
-        "gradeScore": 90.0,
-        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
-        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
-        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
-    }
-}
-```
-### GET /students/
-
-- *General*:
-  - Returns a list of student grades for current session and term.
-```shell
-- **Sample Request:*
-```shell
- $ curl http://127.0.0.1:8000/api/grades/
-```
-- **Sample Response:*
-```json
-[
-    {
-        "grade_id": "ebcbf87c-fa90-4194-8dfe-2044f71f3300",
-        "term": "First",
-        "session": "2023-2024",
-        "gradeScore": 90.0,
-        "staff": "a6938ef9-b225-483c-b399-5b723ba34e31",
-        "student": "bd1a79db-4cc5-4465-a0c9-f7c7d375f36e",
-        "course": "18999922-619c-4e30-815d-88a6b38f79f3"
-    }
-]
 ```
 The API may return the following error types:
 

@@ -29,13 +29,9 @@ class Course(models.Model):
 
 class Grade(models.Model):
     grade_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    staff = models.ForeignKey('Staff', on_delete=models.SET_NULL, null=True)
-    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
-    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    term = models.CharField(max_length=255, default='')
-    session = models.CharField(max_length=255, default='')
-    gradeScore = models.FloatField(default=0)
-
+    grade_name = models.CharField(max_length=50, default='') #Indicating grade level of student
+    grade_description = models.TextField(default='')
+    
     def __str__(self):
         return f"Grade {self.grade_id} - Staff: {self.staff}, Student: {self.student}, Course: {self.course}"
     

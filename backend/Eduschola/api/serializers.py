@@ -1,11 +1,18 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import Group
-from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade, Course
+from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade, Course, Announcement
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assignment
+
+        fields = '__all__'
+
+class AnnouncementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Announcement
+
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
