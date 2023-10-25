@@ -8,16 +8,25 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 class CreateAssignmentApiView(generics.CreateAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+
+class ListAssignmentApiView(generics.ListAPIView):
+    queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
 
 
 class AssignmentApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
-    lookup_field = 'pk'
+    lookup_field = 'pk'    
 
-
-class ListAssignmentApiView(generics.ListAPIView):
-    queryset = Assignment.objects.all()
-    serializer_class = AssignmentSerializer
-
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+                       
+        return Response({
+            'message': 'Assignment deleted successfully'
+            }, status=status.HTTP_204_NO_CONTENT)
+    
+    
