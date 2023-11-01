@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'Eduschola',
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
+    # 'typomatic',
 ]
 
 MIDDLEWARE = [
