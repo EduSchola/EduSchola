@@ -177,31 +177,17 @@ Below are the available API endpoints for the EduSchola Django project:
 - **Sample Request:*
 ```shell
  $ curl http://127.0.0.1:8000/api/students -X POST -H "Content-Type:application/json" -d "{
-  "user": {
-    "username": "student08",
-    "password": "password123",
-    "role": "student",
-    "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da",
-    "first_name": "John",
-    "last_name": "Doe"
-  },
-  "parent": {
     "user": {
-      "username": "parent08",
-      "password": "password456",
-      "role": "parent",
-      "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da",
-      "first_name": "Jane",
-      "last_name": "Smith"
+        "username": "johndoe",
+        "password": "password123",
+        "email": "johndoe@example.com",
+        "role": "student"
     },
-    "tel": "1234567890",
-    "email": "jane.smith@example.com",
-    "address": "123 Street, City"
-  },
-  "date_of_birth": "2005-01-01",
-  "phone_number": "9876543210",
-  "address": "456 Avenue, City",
-  "school": "525567f2-c0bd-4caa-8d2f-e1d157ead4da"
+    "date_of_birth": "2000-01-15",
+    "phone_number": "123-456-7890",
+    "address": "123 Main St",
+    "parent": "",
+    "school": "8686ac90-9ecf-43ce-9398-0da8a20b36f9"
 }"
 ```
 - **Sample Response:*
