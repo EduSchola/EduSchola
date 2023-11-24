@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
 class SchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = School
-        fields = ['school_id', 'name', 'address', 'phone', 'email']
+        fields = ['school_id', 'name', 'address', 'phone', 'email', 'country', 'state', 'city', 'lga']
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -63,7 +63,7 @@ class StaffSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Staff
-        fields = ['staff_id', 'user', 'phone', 'email', 'address', 'school', 'subjects', 'staff_role']
+        fields = ['staff_id', 'user', 'phone', 'email', 'address', 'school', 'subjects', 'staff_role', ' date_of_birth', 'password']
 
 class GradeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
