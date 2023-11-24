@@ -11,10 +11,14 @@ class School(models.Model):
     phone = models.CharField(max_length=25, default='')
     email = models.EmailField(default='')
     address = models.TextField()
+    country = models.TextField(default='')
+    state = models.TextField(default='')
+    city = models.TextField(default='')
+    lga = models.TextField(default='')
+
 
     def __str__(self):
         return self.name
-
 
 class Course(models.Model):
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -25,7 +29,6 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Grade(models.Model):
     grade_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -95,7 +98,6 @@ class Student(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Staff(models.Model):
     staff_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField('User', on_delete=models.CASCADE, null=True, related_name='staff_user')
@@ -104,6 +106,8 @@ class Staff(models.Model):
     address = models.TextField()
     school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
     subjects = models.ManyToManyField('Course', blank=True)
+    date_of_birth = models.DateField(default=timezone.now)
+    password = models.TextField(default='')
     staff_role = models.CharField(max_length=255)  # Add staff role field
 
     def delete(self, *args, **kwargs):
@@ -115,7 +119,6 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.user.username
-
 
 class Parent(models.Model):
     parent_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -134,7 +137,6 @@ class Parent(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
 
 class User(AbstractUser):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -161,3 +163,12 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+class CourseRegistration(models.Model):
+    registration_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    courses = models.ManyToManyField(Course)  
+    session = models.CharField(max_length=10)  # e.g., '2023-2024'
+    registration_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.student} - {', '.join(str(course) for course in self.courses.all())} ({self.session})"

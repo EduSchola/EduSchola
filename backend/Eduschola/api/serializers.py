@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import Group
-from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade, Course, Announcement
+from Eduschola.models import Assignment, Student, Parent, Staff, User, School, Grade, Course, Announcement, CourseRegistration
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,3 +71,7 @@ class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
         fields = '__all__'
+class CourseRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseRegistration
+        fields = ['registration_id', 'student', 'courses', 'session', 'registration_date']

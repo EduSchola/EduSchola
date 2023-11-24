@@ -8,7 +8,7 @@ from .endpoints.course import CreateCourseApiView, ListAllCourseApiView, DetailU
 from .endpoints.school import CreateSchoolApiView
 from .endpoints.assignment import CreateAssignmentApiView, ListAssignmentApiView, AssignmentApiView
 from .endpoints.announcement import CreateAnnouncementApiView, ListAnnouncementApiView, AnnouncementApiView
-
+from .endpoints.courseReg import CreateCourseRegistrationApiView, ListStudentCoursesBySessionApiView, UpdateStudentCoursesApiView
 urlpatterns = [
     # ---------------student url start------------------------
     path('students/', StudentView.as_view(), name='student-list'),
@@ -51,6 +51,13 @@ urlpatterns = [
     path('announcement/list/', ListAnnouncementApiView.as_view(), name='announcement-list'),
     path('announcement/<uuid:pk>/', AnnouncementApiView.as_view(), name='announcement-retrieve-deleye-update'),
     # ---------------announcement url end-------------------------------
+
+    #-----------------course registration url start----------------------------
+    path('create_course_registration/', CreateCourseRegistrationApiView.as_view(), name='create_course_registration'),
+    path('list_student_courses/<uuid:student_id>/<str:session>/', ListStudentCoursesBySessionApiView.as_view(), name='list_student_courses'),
+    path('update_student_courses/<uuid:student_id>/<str:session>/', UpdateStudentCoursesApiView.as_view(), name='update_student_courses'),
+    
+    # ---------------course registration url end-------------------------------
 
     path('' , RedirectView.as_view(url='/'))
 ]
